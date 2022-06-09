@@ -1,0 +1,52 @@
+
+* {
+    /* border: 2px solid red; */
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 90vh;
+}
+
+button {
+    margin: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    align-content: stretch;
+    width: 960px;
+    height: 960px;
+    margin: 0 auto;
+    border: 3px solid black;
+    border-radius: 5px;;
+}
+
+.divRow {
+    display: flex; 
+    flex-direction: row; 
+    height: 100%;
+    width: 100%;
+    align-content: stretch;
+    justify-content: center;
+    background-color: rgb(255, 228, 196);
+    /* border: 2px solid blue; */
+}
+
+.divColumn {
+    display: flex; 
+    height: 100%; 
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    /* border: 2px solid blue; */
+}
+
+/* #divColumn:hover {
+    background-color: aqua;
+} */
