@@ -6,6 +6,10 @@ let counterR = 0;
 let counterC = 0;
 let divColumns;
 
+let blackBrush;
+let magicBrush;
+let gradientBrush = true;
+
 let divContainer = document.getElementById("container");
 const button = document.getElementById("makeGridBtn");
 
@@ -47,10 +51,13 @@ function createNewGrid(x=0,y=0) {
     createGrid(x,y)
 };
 
-function mouseHover(e) {
+function colorBrush(e) {
     
-    if (e.target.attributes.id.textContent[3] == "C") {
+    if (e.target.attributes.id == undefined || e.target.attributes.id.textContent[3] != "C") {
+        return
+    } else {
         let tempCol = document.getElementById(e.target.attributes.id.textContent);
+        
         let divid = e.target.attributes.id.textContent;
         console.log("id: ",divid);
         const element = document.getElementById(divid);
@@ -58,12 +65,20 @@ function mouseHover(e) {
         const style = getComputedStyle(element);
         console.log(style.backgroundColor);
         let colorRGB = style.backgroundColor;
-        newColor = colorAddition(colorRGB);
+
+        if (gradientBrush == true) {
+            newColor = colorAdditionGradient(colorRGB);
+        } else if (magicBrush == true) {
+            newColor = colorAdditionMagic();
+        } else {
+            newColor = "rgb(0, 0, 0)"
+        }
+        console.log("New Color: " + newColor);
         tempCol.style.cssText = `background-color: ${newColor}`;
-    } else return;
+    }
 }
 
-function colorAddition(color) {
+function colorAdditionGradient(color) {
     let r,g,b;
 
     if (color.slice(4,7) > 99){
@@ -83,7 +98,7 @@ function colorAddition(color) {
     console.log(r + " " + g + " " + b)
     console.log(r + g + b)
 
-    if (b <= 21) {
+    if (b < 0) {
         return "rgb(0, 0, 0)"
     } else {
         return `rgb(${r}, ${g}, ${b})`
@@ -91,6 +106,43 @@ function colorAddition(color) {
 
 }
 
+function colorAdditionMagic() {
+
+    let r,g,b;
+    r = Math.floor(Math.random() * 255)
+    g = Math.floor(Math.random() * 255)
+    b = Math.floor(Math.random() * 255)
+
+    console.log("R Color: " + r)
+
+    return `rgb(${r}, ${g}, ${b})`
+}
+
+function changeBrush(brush) {
+    if (brush == 'blackBrush') {
+        blackBrush = true;
+        magicBrush = false;
+        gradientBrush = false;
+    } else if (brush == 'magicBrush') {
+        blackBrush = false;
+        magicBrush = true;
+        gradientBrush = false;
+    } else {
+        blackBrush = false;
+        magicBrush = false;
+        gradientBrush = true;
+    }
+}
+
+function clearCanvas() {
+
+    divColumns.forEach(function(value) {value.style.cssText = "rgb(255, 255, 255)"});
+
+}
+
+
+
 createGrid();
 
-divColumns.forEach(addEventListener('mouseover', mouseHover));
+
+divColumns.forEach(addEventListener('mouseover', colorBrush));

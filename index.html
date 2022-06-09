@@ -10,7 +10,17 @@
 </head>
 <body>
     <h1>Etch-a-Sketch</h1>
-    <button id="makeGridBtn" onclick="createNewGrid()">Specify grid</button>
+    <div id="buttons">
+        <div id="actions">
+            <button id="makeGridBtn" onclick="createNewGrid()">Specify grid</button>
+            <button id="clearCanvasBtn" onclick="clearCanvas()">Clear Canvas</button>
+        </div>
+        <div id="brushesBtn">
+            <button id="blackBrush" onclick="changeBrush('blackBrush')">Solid Brush</button>
+            <button id="magicBrush" onclick="changeBrush('magicBrush')">Magic Brush</button>
+            <button id="gradientBrush" onclick="changeBrush('gradientBrush')">Gradient Brush</button>
+        </div>
+    </div>
     <div id="container"></div>
 
 </body>
